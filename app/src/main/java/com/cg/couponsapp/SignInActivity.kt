@@ -3,13 +3,16 @@ package com.cg.couponsapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.view.LayoutInflater
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -42,6 +45,9 @@ class SignInActivity : AppCompatActivity(){
         }
         googleLoginBtn.setOnClickListener {
             googleSignIn()
+        }
+        textView2.setOnClickListener {
+            passwordReset()
         }
     }
     private fun googleSignIn() {
@@ -118,6 +124,38 @@ class SignInActivity : AppCompatActivity(){
         else{
             Toast.makeText(this,"$msg",Toast.LENGTH_LONG).show()
         }
+    }
+    private fun passwordReset(){
+        val dialog = MaterialAlertDialogBuilder(this)
+        val layoutInflater = LayoutInflater.from(this)
+        val customView = layoutInflater.inflate(R.layout.custom_input_dialog,null,false)
+        val txt_inputText = customView.findViewById(R.id.txt_input) as TextView
+        val btn_cancel: Button = customView.findViewById(R.id.btn_cancel) as Button
+        val btn_okay: Button = customView.findViewById(R.id.btn_okay) as Button
+        dialog.setView(customView)
+        val materialDialog = dialog.create()
+        materialDialog.setCancelable(false)
+        btn_cancel.setOnClickListener {
+            materialDialog.dismiss()
+        }
+        btn_okay.setOnClickListener {
+            if(txt_inputText.text.isEmpty()){
+                txt_inputText.error = "Please Enter Email"
+                txt_inputText.requestFocus()
+            }
+            else{
+                auth.sendPasswordResetEmail(txt_inputText.text.toString())
+                    .addOnCompleteListener{
+                        if(it.isSuccessful){
+                            Toast.makeText(this,"Password Reset Mail Sent Successfully",Toast.LENGTH_LONG).show()
+                        }
+                        else{
+                            Toast.makeText(this,"${it.exception?.message}",Toast.LENGTH_LONG).show()
+                        }
+                    }
+            }
+        }
+        materialDialog.show()
     }
 
 }
