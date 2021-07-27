@@ -3,14 +3,18 @@
 
     <item
         android:id="@+id/navNews"
+        android:icon="@drawable/news_bottom_nav_icon"
         android:title="@string/news" />
     <item
         android:id="@+id/navCoupons"
+        android:icon="@drawable/coupon_bottom_nav_icon"
         android:title="@string/coupons" />
     <item
         android:id="@+id/navFeed"
+        android:icon="@drawable/home_bottom_nav_icon"
         android:title="@string/feed" />
     <item
         android:id="@+id/navSettings"
+        android:icon="@drawable/setting_bottom_nav_icon"
         android:title="@string/settings" />
 </menu>
