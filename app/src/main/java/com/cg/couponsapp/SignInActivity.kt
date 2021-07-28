@@ -77,7 +77,10 @@ class SignInActivity : AppCompatActivity(){
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     Toast.makeText(this, "Authentication Successful", Toast.LENGTH_SHORT).show()
-                    updateUI(user)
+                    val i = Intent(this,NavigationActivity::class.java)
+                    startActivity(i)
+                    finish()
+                //updateUI(user)
                 } else { //wrong details
                     Toast.makeText(this, "${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
