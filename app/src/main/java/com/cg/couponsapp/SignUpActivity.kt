@@ -64,7 +64,7 @@ class SignUpActivity : AppCompatActivity() {
             }
     }
     private fun saveUser() {
-        val userid = auth.currentUser.uid
+        val userid = auth.currentUser?.uid
 //        val user = User(id = userid,name = nameE.text.toString())
 //        ref.child(userid).setValue(user).addOnCompleteListener {
 //            Log.d("SignUp","UserAdded")
