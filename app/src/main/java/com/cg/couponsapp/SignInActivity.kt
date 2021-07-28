@@ -3,11 +3,13 @@ package com.cg.couponsapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.cg.couponsapp.model.Users
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -16,12 +18,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 
 class SignInActivity : AppCompatActivity(){
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var database : FirebaseDatabase
     lateinit var googleSignInClient : GoogleSignInClient
     val RC_SIGN_IN :Int = 12  // constant value for google sign in response. Can be any independent constant value
     lateinit var gso : GoogleSignInOptions
@@ -31,6 +35,7 @@ class SignInActivity : AppCompatActivity(){
         setContentView(R.layout.activity_sign_in)
 
         auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -105,8 +110,11 @@ class SignInActivity : AppCompatActivity(){
             if (task.isSuccessful) {
                 // Sign in success, update UI with the signed-in user's information
                 val user = auth.currentUser
-//                val users = Users(user?.displayName!!,user.email!!, USER_TYPE,"")
-//                if(task.result?.additionalUserInfo?.isNewUser!!) fDatabase.reference.child("users").child(user.uid).setValue(users)
+                val users = Users(user?.displayName!!,user.email!!, 0,0L)
+                if(task.result?.additionalUserInfo?.isNewUser!!) {
+                    Log.d("isNew","Yes")
+                    database.reference.child("users").child(user.uid).setValue(users)
+                }
                 googleSignInStatus("Success",user)
             } else {
                 // If sign in fails, display a message to the user.
