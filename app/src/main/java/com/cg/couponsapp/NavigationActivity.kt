@@ -36,6 +36,8 @@ class NavigationActivity : AppCompatActivity(){
 
         setupActionBarWithNavController(navController)
         setupSmoothBottomMenu()
+
+        binding.bottomBar.setOnItemReselectedListener {  }
     }
 
     private fun setupSmoothBottomMenu() {
@@ -45,6 +47,8 @@ class NavigationActivity : AppCompatActivity(){
         binding.bottomBar.setupWithNavController(menu, navController)
 
     }
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()

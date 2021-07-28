@@ -87,7 +87,7 @@ class SignInActivity : AppCompatActivity(){
             }
     }
     private fun updateUI(currentUser : FirebaseUser?){
-        startActivity(Intent(this,ChangePasswordActivity::class.java))
+        startActivity(Intent(this,NavigationActivity::class.java))
         finish()
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
