@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.cg.couponsapp.model.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -64,20 +65,19 @@ class SignUpActivity : AppCompatActivity() {
             }
     }
     private fun saveUser() {
-        val userid = auth.currentUser?.uid
+        val userid = auth.currentUser?.uid!!
+        val user = Users(nameE.text.toString(),emailE.text.toString(),0,0L)
 //        val user = User(id = userid,name = nameE.text.toString())
-//        ref.child(userid).setValue(user).addOnCompleteListener {
-//            Log.d("SignUp","UserAdded")
-//        }
+        ref.child(userid).setValue(user)
     }
 
 
     private fun updateUI(user: FirebaseUser?) {
         Toast.makeText(this, "User Created", Toast.LENGTH_SHORT).show()
-//        val intent = Intent(this, AccountActivity::class.java)
+        val intent = Intent(this, SignInActivity::class.java)
 //        intent.putExtra("new",true)
-//        startActivity(intent)
-//        finish()
+        startActivity(intent)
+        finish()
     }
 
 }
