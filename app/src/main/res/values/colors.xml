@@ -11,5 +11,9 @@
     <color name="inputText">#2D2C2C</color>
     <color name="textHint">#828080</color>
     <color name="redFade">#E44D4D</color>
+    <color name="iconTint">#C8FFFFFF</color>
+    <color name="iconTintActive">#FFFFFF</color>
+    <color name="indicatorColor">#2DFFFFFF</color>
+
 
 </resources>
