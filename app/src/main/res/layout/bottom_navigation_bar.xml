@@ -5,34 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <me.ibrahimsn.lib.SmoothBottomBar
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        app:backgroundColor="@color/signBtnBG"
-        app:iconSize="26dp"
-        app:iconTint="@color/iconTint"
-        app:iconTintActive="@color/iconTintActive"
-        app:indicatorColor="@color/indicatorColor"
-        app:indicatorRadius="10dp"
-        app:itemPadding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu"
-        app:sideMargins="10dp"
-        app:textColor="@color/white"
-        app:textSize="14sp" />
 
-    <FrameLayout
-        android:id="@+id/navFrameL"
-        android:layout_width="409dp"
-        android:layout_height="659dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

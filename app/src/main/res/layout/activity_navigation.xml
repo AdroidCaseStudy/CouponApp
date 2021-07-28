@@ -5,25 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
-        android:hapticFeedbackEnabled="true"
+    <me.ibrahimsn.lib.SmoothBottomBar
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:backgroundColor="@color/signBtnBG"
+        app:iconSize="26dp"
+        app:iconTint="@color/iconTint"
+        app:iconTintActive="@color/iconTintActive"
+        app:indicatorColor="@color/indicatorColor"
+        app:indicatorRadius="10dp"
+        app:itemPadding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
-
+        app:menu="@menu/bottom_nav_menu"
+        app:sideMargins="10dp"
+        app:textColor="@color/white"
+        app:textSize="14sp" />
     <fragment
-        android:id="@+id/nav_host_fragment"
+        android:id="@+id/bottom_nav_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#FFFFFF"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
