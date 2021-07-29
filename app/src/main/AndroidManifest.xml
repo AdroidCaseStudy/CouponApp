@@ -8,21 +8,21 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_without_text"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_without_text"
         android:supportsRtl="true"
         android:theme="@style/Theme.CouponsApp">
         <activity android:name=".ChangePasswordActivity"></activity>
         <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SignInActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".SignInActivity" />
         <activity android:name=".NavigationActivity">
         </activity>
     </application>
