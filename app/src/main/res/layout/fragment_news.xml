@@ -7,21 +7,20 @@
     android:layout_height="300dp"
     android:layout_margin="8dp"
     android:orientation="horizontal"
-    app:cardBackgroundColor="@color/navy"
+    app:cardBackgroundColor="@color/textHint"
     app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:background="@drawable/gradient_background">
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/newsTitleT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@drawable/curve_reactangle_night"
-            android:backgroundTint="@color/Blue300"
+            android:fontFamily="serif"
             android:padding="2dp"
             android:text="TextView"
             android:textAlignment="center"
@@ -32,23 +31,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/newsImgV"
-            android:layout_width="184dp"
-            android:layout_height="124dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="180dp"
+            android:layout_height="110dp"
             android:layout_marginTop="5dp"
+            app:cardCornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newsTitleT"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            app:layout_constraintTop_toBottomOf="@+id/newsTitleT">
+
+            <ImageView
+                android:id="@+id/newsImgV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/no_image" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/newsSourceT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@drawable/curve_reactangle_night"
-            android:backgroundTint="@color/Blue300"
+            android:fontFamily="serif"
             android:padding="2dp"
             android:text="TextView"
             android:textColor="@color/black"
@@ -56,20 +62,19 @@
             app:layout_constraintEnd_toStartOf="@+id/newsPublishedAtT"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/newsImgV" />
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
         <TextView
             android:id="@+id/newDescT"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="3dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="2dp"
-            android:background="@drawable/curve_reactangle_night"
-            android:backgroundTint="@color/Blue300"
-            android:padding="1dp"
+            android:layout_marginEnd="3dp"
+            android:fontFamily="serif"
             android:text="TextView"
             android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/newsSourceT" />
@@ -78,15 +83,13 @@
             android:id="@+id/newsPublishedAtT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/curve_reactangle_night"
-            android:backgroundTint="@color/Blue300"
+            android:fontFamily="serif"
             android:padding="2dp"
             android:text="TextView"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/newsSourceT"
-            app:layout_constraintTop_toBottomOf="@+id/newsImgV" />
+            app:layout_constraintTop_toTopOf="@+id/newsSourceT" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

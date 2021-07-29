@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         app:backgroundColor="@color/signBtnBG"
-        app:iconSize="26dp"
+        app:iconSize="24dp"
         app:iconTint="@color/iconTint"
         app:iconTintActive="@color/iconTintActive"
         app:indicatorColor="@color/indicatorColor"
