@@ -13,21 +13,22 @@
         android:roundIcon="@drawable/logo_without_text"
         android:supportsRtl="true"
         android:theme="@style/Theme.CouponsApp">
-        <activity android:name=".SplashActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            >
+        <activity android:name=".AboutUsActivity"></activity>
+        <activity android:name=".EditProfileActivity" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ChangePasswordActivity" />
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".SignInActivity" >
-        </activity>
-        <activity android:name=".NavigationActivity"></activity>
+        <activity android:name=".SignInActivity" />
+        <activity android:name=".NavigationActivity" />
     </application>
 
 </manifest>
