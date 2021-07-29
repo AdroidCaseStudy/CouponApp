@@ -84,7 +84,7 @@
 
         <TextView
             android:id="@+id/newsPublishedAtT"
-            android:layout_width="120dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="164dp"
             android:layout_marginTop="4dp"
