@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="#024BFF"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
-    android:layout_height="match_parent">
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/no_internet"
-        android:layout_gravity="center"/>
+    android:orientation="vertical">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/splashAnimation2"
+        android:layout_width="375dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/no_internet" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ooops!"
         android:gravity="center"
-        android:textColor="#FFF"
-        android:textSize="40sp"/>
+        android:text="Ooops!"
+        android:textSize="40sp" />
+
     <TextView
         android:id="@+id/nettext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No Internet Connection found"
-        android:textColor="#FFF"
-        android:textSize="15sp"
         android:layout_marginBottom="10dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="No Internet Connection"
+        android:textSize="15sp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -32,13 +38,13 @@
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="ON YOUR PHONE - HIT RESTART"
-        android:textColor="#FFF"
         android:textSize="15sp" />
+
     <Button
         android:id="@+id/restartapp"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:background="@drawable/curve_reactangle_night"
         android:text="Restart"
-        android:textSize="20sp"
-        android:background="@android:color/holo_green_light"/>
+        android:textSize="20sp" />
 </LinearLayout>
