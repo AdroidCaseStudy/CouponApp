@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.cg.couponsapp.model.Users
+import com.cg.couponsapp.utils.NetworkUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -36,6 +37,13 @@ class SignInActivity : AppCompatActivity(){
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
+        val networkState = NetworkUtil().checkStatus(this,this.intent)
+        if(networkState) {
+            if (auth.currentUser != null) {
+                startActivity(Intent(this,NavigationActivity::class.java))
+                finish()
+            }
+        }
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
