@@ -18,18 +18,17 @@
 
         <ImageView
             android:id="@+id/logoImg"
-            android:layout_width="315dp"
-            android:layout_height="wrap_content"
+            android:layout_width="256dp"
+            android:layout_height="114dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/ic_overnight_stay" />
+            app:srcCompat="@drawable/logo_without_text" />
 
         <TextView
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/round_edittext"
+            android:layout_margin="15dp"
             android:padding="4dp"
             android:text="@string/sign_up"
             android:textColor="@color/teal_700"
@@ -95,6 +94,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/signBtnBG"
+            android:hapticFeedbackEnabled="true"
             android:text="@string/sign_up"
             android:textColor="@color/white"
             app:cornerRadius="15dp" />
@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:background="@drawable/round_edittext"
+            android:hapticFeedbackEnabled="true"
             android:padding="2dp"
             android:text="@string/existing_user"
             android:textColor="@color/teal_700"
