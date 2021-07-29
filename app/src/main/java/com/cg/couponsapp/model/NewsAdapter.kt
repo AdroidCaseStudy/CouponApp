@@ -49,7 +49,7 @@ class NewsAdapter(val newsList: List<News>): RecyclerView.Adapter<NewsAdapter.Vi
         val imageUrl = news.urlToImage
         if(imageUrl.isNullOrEmpty()){}
         else{
-            Glide.with(holder.itemView.context).load(Uri.parse(imageUrl)).into(holder.imgV)
+            Glide.with(holder.itemView.context).load(Uri.parse(imageUrl)).placeholder(R.drawable.waiting).into(holder.imgV)
         }
 
         holder.cardView.setOnClickListener {
