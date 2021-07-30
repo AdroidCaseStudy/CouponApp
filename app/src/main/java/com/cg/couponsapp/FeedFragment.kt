@@ -51,7 +51,7 @@ class FeedFragment : Fragment() {
 
 
         //UPDATE ADAPTER CHECK
-        rView.adapter = FeedAdapter(listOf(Feed(url="https://i.imgur.com/YkjBfxg.jpeg"),Feed(url="https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4",isImage = false)))
+        rView.adapter = FeedAdapter(listOf(Feed(url="https://i.imgur.com/YkjBfxg.jpeg"),Feed(url="https://www.youtube.com/watch?v=8MLa-Lh8lkU&ab_channel=EDMTDev",isImage = false),))
     }
 
     override fun onPause() {
