@@ -1,6 +1,7 @@
 package com.cg.couponsapp.model
 
 import android.net.Uri
+import android.util.Log
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
@@ -46,8 +47,9 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
         holder.descpT.text = feed.description
 
         //IMAGE
-        if(feed.isImage) {
+        if(feed.image) {
             holder.imageV.visibility =View.VISIBLE
+            holder.videoV.visibility = View.INVISIBLE
             val imageUrl = feed.url
             if (imageUrl.isNullOrEmpty()) {
             } else {
@@ -59,11 +61,13 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
         //VIDEO EXOPLAYER
         else{
             holder.videoV.visibility =View.VISIBLE
-            videoUrl = feed.url
+            holder.imageV.visibility =View.INVISIBLE
+            videoUrl = "${feed.url}"
             var videoPlayer: SimpleExoPlayer? = null
             videoPlayer = SimpleExoPlayer.Builder(holder.itemView.context).build()
             holder.videoV?.player = videoPlayer
 
+            Log.d("FeedList","$videoUrl")
             playYoutubeVideo(videoUrl,holder,videoPlayer)
             //initializePlayer(holder)
         }
@@ -79,7 +83,7 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
             ) {
                 if(ytFiles!=null)
                 {
-                    val videoTag = 137
+                    val videoTag = 18
                     val audioTag = 140
                     val audioSource:MediaSource =ProgressiveMediaSource.Factory(DefaultHttpDataSource.Factory()).createMediaSource(
                         MediaItem.fromUri(ytFiles.get(audioTag).url))
