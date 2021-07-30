@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/splashAnimation2"
+        android:id="@+id/claim_animation"
         android:layout_width="375dp"
         android:layout_height="320dp"
         android:layout_marginTop="5dp"
@@ -37,14 +37,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:text="ON YOUR PHONE - HIT RESTART"
+        android:text="Check Internet and Hit Restart"
         android:textSize="15sp" />
 
     <Button
         android:id="@+id/restartapp"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:background="@drawable/curve_reactangle_night"
         android:text="Restart"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        app:cornerRadius="15dp" />
 </LinearLayout>

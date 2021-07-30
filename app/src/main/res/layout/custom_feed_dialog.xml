@@ -15,7 +15,9 @@
         android:layout_weight="0"
         android:gravity="center"
         android:text="Add New Feed"
-        android:textSize="18sp" />
+        android:textColor="@color/signBtnBG"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <RadioGroup
         android:id="@+id/post_radio_group"
@@ -87,7 +89,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="88dp"
         android:layout_weight="0"
         android:gravity="center"
         android:orientation="horizontal">
@@ -96,17 +98,25 @@
             android:id="@+id/post_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="8dp"
+            android:layout_marginBottom="20dp"
             android:layout_weight="0"
-            android:text="Button" />
+            android:backgroundTint="#C70000"
+            android:text="Cancel"
+            app:cornerRadius="15dp" />
 
         <Button
             android:id="@+id/post_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_weight="0"
-            android:text="POST" />
+            android:backgroundTint="@color/signBtnBG"
+            android:text="POST"
+            app:cornerRadius="15dp" />
     </LinearLayout>
 
 </LinearLayout>
