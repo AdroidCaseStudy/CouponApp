@@ -1,4 +1,4 @@
-package com.cg.couponsapp.model
+package com.cg.couponsapp.utils
 
 import android.content.Intent
 import android.net.Uri
@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cg.couponsapp.R
+import com.cg.couponsapp.model.News
 import java.text.SimpleDateFormat
 import java.util.*
 

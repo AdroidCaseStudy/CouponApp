@@ -13,7 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cg.couponsapp.model.Articles
-import com.cg.couponsapp.model.NewsAdapter
+import com.cg.couponsapp.utils.NewsAdapter
+import kotlinx.android.synthetic.main.fragment_news_list.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,6 +53,7 @@ class NewsFragment: Fragment(), AdapterView.OnItemSelectedListener {
         override fun onResponse(call: Call<Articles>, response: Response<Articles>) {
             //Toast.makeText(this@MainActivity,"${response.body()}",Toast.LENGTH_LONG).show()
             if(response.isSuccessful) {
+                newsPBar.visibility=View.INVISIBLE
                 val news = response.body()
                 news?.articles?.let {
                     rView.adapter = NewsAdapter(it)
