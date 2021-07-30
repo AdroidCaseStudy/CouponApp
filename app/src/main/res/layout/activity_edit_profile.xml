@@ -29,6 +29,7 @@
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
+            android:onClick="onClick"
             app:srcCompat="@android:drawable/ic_menu_camera" />
 
         <EditText
@@ -73,6 +74,7 @@
             android:layout_margin="10dp"
 
             android:backgroundTint="@color/teal_700"
+            android:onClick="onClick"
             android:text="SAVE" />
 
 

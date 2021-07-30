@@ -5,13 +5,21 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.fragment_settings.view.*
+
 
 
 class SettingsFragment : Fragment() {
@@ -24,6 +32,25 @@ class SettingsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
+        val user = FirebaseAuth.getInstance().currentUser
+        val reference = FirebaseDatabase.getInstance().getReference(Constants.USERS).child(user?.uid!!)
+
+        reference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    val username =
+                            dataSnapshot.child(Constants.USERNAME).value.toString()
+
+                        view.userNameTV?.setText(username)
+
+            }
+
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+
+
+        view.userEmailTV.text = user?.email
 
         view.editProfileBtn.setOnClickListener{
             val intent = Intent(activity, EditProfileActivity::class.java)

@@ -16,10 +16,15 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_edit_profile.*
+import kotlinx.android.synthetic.main.fragment_settings.view.*
 
 class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -33,21 +38,24 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
 
         supportActionBar?.hide()
 
-        val user = Firebase.auth.currentUser
+        val user = FirebaseAuth.getInstance().currentUser
+        val reference = FirebaseDatabase.getInstance().getReference(Constants.USERS).child(user?.uid!!)
 
-        firestore.collection(Constants.USERS).document(getCurrentUserID())
-            .addSnapshotListener{snapshot,error->
-                if(snapshot != null && snapshot.exists()){
-                    editUserNameET.setText(snapshot[Constants.FIRST_NAME].toString()+" "
-                            + snapshot[Constants.LAST_NAME])
+        reference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                    val img_url = ""
+                val username =
+                        dataSnapshot.child(Constants.USERNAME).value.toString()
 
-                    Glide.with(getApplicationContext())
-                        .load(img_url)
-                        .into(profileImage);
-                }
+                    editUserNameET.setText(username)
+
             }
+
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+
+
 
 
 
@@ -102,8 +110,8 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
         val location = editLocationET.text.toString().trim{it<=' '}
 
         if(username.isNotEmpty()){
-            userHashMap[Constants.FIRST_NAME] = username.substringBefore(' ')
-            userHashMap[Constants.LAST_NAME] = username.substringAfter(' ')
+            userHashMap[Constants.USERNAME] = username
+
         }
         if(mobile.isNotEmpty()){
             userHashMap[Constants.MOBILE] = mobile.toLong()

@@ -10,8 +10,8 @@ object Constants {
     const val USERS:String = "users"
     const val APP_PREFERENCES: String = "AppPrefs"
     const val LOGGED_IN_USERNAME: String = "logged_in_username"
-    const val FIRST_NAME:String = "firstName"
-    const val LAST_NAME:String = "lastName"
+    const val USERNAME:String = "name"
+
 
     const val EXTRA_USER_DETAILS:String = "extra_user_details"
     const val READ_STORAGE_PERMISSION_CODE = 2
