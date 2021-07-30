@@ -147,7 +147,7 @@ class SignInActivity : AppCompatActivity(){
     private fun passwordReset(){
         val dialog = MaterialAlertDialogBuilder(this)
         val layoutInflater = LayoutInflater.from(this)
-        val customView = layoutInflater.inflate(R.layout.custom_input_dialog,null,false)
+        val customView = layoutInflater.inflate(R.layout.custom_forgot_password_dialog,null,false)
         val txt_inputText = customView.findViewById(R.id.txt_input) as TextView
         val btn_cancel: Button = customView.findViewById(R.id.btn_cancel) as Button
         val btn_okay: Button = customView.findViewById(R.id.btn_okay) as Button
