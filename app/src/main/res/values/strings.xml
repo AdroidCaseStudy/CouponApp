@@ -25,7 +25,8 @@
     <string name="about_us">About Us</string>
     <string name="logout">Logout</string>
     <string name="notifi_toggle_button">Off</string>
-
+    <string name="OFF">Off</string>
+    <string name="ON">Off</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
