@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cg.couponsapp.model.Articles
-import com.cg.couponsapp.model.NewsAdapter
+import com.cg.couponsapp.utils.NewsAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

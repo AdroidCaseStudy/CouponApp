@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/navNews"
         android:name="com.cg.couponsapp.NewsFragment"
-        android:label="NewsFragment" >
+        android:label="News">
         <action
             android:id="@+id/action_newsFragment_to_couponsFragment"
             app:destination="@id/navCoupons" />
@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/navCoupons"
         android:name="com.cg.couponsapp.CouponsFragment"
-        android:label="fragment_coupons"
+        android:label="Coupons"
         tools:layout="@layout/fragment_coupons" />
     <fragment
         android:id="@+id/navSettings"
