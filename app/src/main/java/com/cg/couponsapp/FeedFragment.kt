@@ -177,6 +177,6 @@ class FeedFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-
+        rView.adapter = null
     }
 }

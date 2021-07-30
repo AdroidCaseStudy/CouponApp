@@ -1,180 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:textAlignment="textStart">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:orientation="vertical"
+        android:textAlignment="textStart">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:hint="@string/user_email"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:hint="@string/username"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/profile_pic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:srcCompat="@drawable/blank_profile" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
+            android:id="@+id/editProf_TV"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:hint="@string/user_email"
+            android:layout_marginTop="30dp"
+            android:fontFamily="sans-serif"
+            android:hapticFeedbackEnabled="true"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="@string/edit_profile"
+            android:textAlignment="textStart"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:drawableEndCompat="@drawable/mdtp_ic_chevron_right_black_24dp"
+            app:drawableStartCompat="@android:drawable/ic_menu_edit" />
 
         <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
+            android:id="@+id/changePass_TV"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:hint="@string/username"
+            android:layout_marginTop="0dp"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="@string/change_password"
+            android:textAlignment="textStart"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:drawableEndCompat="@drawable/mdtp_ic_chevron_right_black_24dp"
+            app:drawableStartCompat="@android:drawable/ic_menu_manage" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
+        <Switch
+            android:id="@+id/notifi_switchB"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/profile_pic"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.06"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:srcCompat="@drawable/blank_profile" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:drawableStart="@android:drawable/sym_action_email"
+            android:fontFamily="sans-serif"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="@string/notifications"
+            android:textAlignment="textStart"
+            android:textOff="@string/OFF"
+            android:textOn="@string/ON"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:thumbTint="@color/signBtnBG"
+            android:thumbTintMode="src_in" />
 
-    <TextView
-        android:id="@+id/editProf_TV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="sans-serif"
-        android:hapticFeedbackEnabled="true"
-        android:paddingStart="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:text="@string/edit_profile"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:drawableEndCompat="@drawable/mdtp_ic_chevron_right_black_24dp"
-        app:drawableStartCompat="@android:drawable/ic_menu_edit" />
+        <TextView
+            android:id="@+id/sendFeedback_TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="@string/send_feedback"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:drawableEndCompat="@drawable/mdtp_ic_chevron_right_black_24dp"
+            app:drawableStartCompat="@android:drawable/sym_action_chat" />
 
-    <TextView
-        android:id="@+id/changePass_TV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:paddingStart="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:text="@string/change_password"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:drawableEndCompat="@drawable/mdtp_ic_chevron_right_black_24dp"
-        app:drawableStartCompat="@android:drawable/ic_menu_manage" />
+        <TextView
+            android:id="@+id/rateUs_TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@string/Rate_Us"
+            app:drawableEndCompat="@drawable/mdtp_ic_chevron_right_black_24dp"
+            app:drawableStartCompat="@android:drawable/btn_star" />
 
-    <Switch
-        android:id="@+id/notifi_switchB"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableStart="@android:drawable/sym_action_email"
-        android:fontFamily="sans-serif"
-        android:paddingStart="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:text="@string/notifications"
-        android:textAlignment="textStart"
-        android:textOff="@string/OFF"
-        android:textOn="@string/ON"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:thumbTint="@color/signBtnBG"
-        android:thumbTintMode="src_in" />
+        <TextView
+            android:id="@+id/aboutUs_TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@android:drawable/ic_input_get"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="@string/about_us"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:drawableEndCompat="@drawable/mdtp_ic_chevron_right_black_24dp" />
 
-    <TextView
-        android:id="@+id/sendFeedback_TV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:text="@string/send_feedback"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:drawableEndCompat="@drawable/mdtp_ic_chevron_right_black_24dp"
-        app:drawableStartCompat="@android:drawable/sym_action_chat" />
+        <TextView
+            android:id="@+id/logout_TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@android:drawable/ic_lock_power_off"
+            android:paddingStart="25dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="20dp"
+            android:text="@string/logout"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/rateUs_TV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="@string/Rate_Us"
-        app:drawableEndCompat="@drawable/mdtp_ic_chevron_right_black_24dp"
-        app:drawableStartCompat="@android:drawable/btn_star" />
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:backgroundTint="@color/black"
+            android:foregroundTint="@color/black" />
 
-    <TextView
-        android:id="@+id/aboutUs_TV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableStart="@android:drawable/ic_input_get"
-        android:paddingStart="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:text="@string/about_us"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:drawableEndCompat="@drawable/mdtp_ic_chevron_right_black_24dp" />
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:padding="10dp"
+            android:text="CashCoup All Rights Reserved 2021-25"
+            android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/logout_TV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableStart="@android:drawable/ic_lock_power_off"
-        android:paddingStart="25dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="20dp"
-        android:text="@string/logout"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <View
-        android:id="@+id/divider4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        android:backgroundTint="@color/black"
-        android:foregroundTint="@color/black" />
-
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="CashCoup All Rights Reserved 2021-25"
-        android:textAlignment="center" />
-
-</LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
