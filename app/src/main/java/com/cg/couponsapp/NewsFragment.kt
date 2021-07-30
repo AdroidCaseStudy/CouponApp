@@ -53,7 +53,7 @@ class NewsFragment: Fragment(), AdapterView.OnItemSelectedListener {
         override fun onResponse(call: Call<Articles>, response: Response<Articles>) {
             //Toast.makeText(this@MainActivity,"${response.body()}",Toast.LENGTH_LONG).show()
             if(response.isSuccessful) {
-                newsPBar.visibility=View.INVISIBLE
+                newsPBar?.visibility=View.INVISIBLE
                 val news = response.body()
                 news?.articles?.let {
                     rView.adapter = NewsAdapter(it)
