@@ -7,7 +7,8 @@
     <fragment
         android:id="@+id/navNews"
         android:name="com.cg.couponsapp.NewsFragment"
-        android:label="NewsFragment" >
+        android:label="NewsFragment"
+        tools:layout="@layout/fragment_news" >
         <action
             android:id="@+id/action_newsFragment_to_couponsFragment"
             app:destination="@id/navCoupons" />
@@ -17,6 +18,11 @@
         android:name="com.cg.couponsapp.CouponsFragment"
         android:label="fragment_coupons"
         tools:layout="@layout/fragment_coupons" />
+    <fragment
+        android:id="@+id/navFeed"
+        android:name="com.cg.couponsapp.FeedFragment"
+        android:label="FeedFragment"
+        tools:layout="@layout/fragment_feed"/>
     <fragment
         android:id="@+id/navSettings"
         android:name="com.cg.couponsapp.SettingsFragment"
