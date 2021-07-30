@@ -59,11 +59,12 @@ class CouponsAdapter(val view: View) {
 
                                     val coins : Long = snapshot.child("coins").value as Long
 
-                                    if(!snapshot.child("couponsClaimed").hasChild(couponID))
+                                    if(!snapshot.child("couponsClaimed").child(couponID).exists())
                                     {
                                         val couponMap = HashMap<String,Any>()
                                         couponMap["cid"] = couponID
                                         couponMap["name"] = title
+                                        couponMap["status"] = "claimed"
 
                                         usersReference.child(currentUserId!!).child("couponsClaimed").child(couponID).updateChildren(couponMap).addOnCompleteListener {
                                             if(it.isSuccessful) {
@@ -81,14 +82,33 @@ class CouponsAdapter(val view: View) {
                                             }
                                         }
                                     }
-                                    else {
-                                        Toast.makeText(holder.itemView.context,"Coupon already claimed",Toast.LENGTH_LONG).show()
+                                    else{
+
                                     }
                                 }
-
                                 override fun onCancelled(error: DatabaseError) {}
-
                             })
+
+                            usersReference.child(currentUserId!!).addValueEventListener(object : ValueEventListener{
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    if(snapshot.child("couponsClaimed").hasChild(couponID)){
+                                        val status = snapshot.child("couponsClaimed").child(couponID).child("status").value.toString()
+                                        if(status.equals("claimed")) {
+                                            holder.couponClaimB.text = "Claimed"
+                                            holder.couponClaimB.isEnabled = false
+                                        }}}
+                                override fun onCancelled(error: DatabaseError) {}
+                            })
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {}
+                })
+
+                usersReference.child(currentUserId!!).addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if(snapshot.child("couponsClaimed").hasChild(couponID)){
+                            holder.couponClaimB.text = "Claimed"
+                            holder.couponClaimB.isEnabled = false
                         }
                     }
                     override fun onCancelled(error: DatabaseError) {}
