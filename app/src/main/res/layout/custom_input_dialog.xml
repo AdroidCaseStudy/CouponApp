@@ -1,72 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/appbg"
-    android:orientation="vertical"
     android:padding="15dp">
 
     <TextView
-        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:text="Enter your Email Id"
+        android:layout_marginTop="30dp"
+        android:capitalize="none"
+        android:text="FORGOT PASSWORD"
         android:textAlignment="center"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/txt_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/round_edittext"
-        android:hint="Email Id"
-        android:padding="8dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        android:layout_marginTop="30dp"
+        android:hint="Enter Email ID"
+        android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btn_okay"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/signBtnBG"
-        android:padding="4dp"
-        android:text="Send Link"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
-        app:cornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_cancel"
-        app:layout_constraintTop_toBottomOf="@+id/txt_input" />
+        android:layout_marginTop="15dp">
 
-    <Button
-        android:id="@+id/btn_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:backgroundTint="@color/signBtnBG"
-        android:padding="4dp"
-        android:text="Cancel"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
-        app:cornerRadius="15dp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_okay"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_okay" />
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:backgroundTint="#C70000"
+            android:padding="4dp"
+            android:text="Cancel"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            app:cornerRadius="15dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btn_okay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:backgroundTint="#008000"
+            android:padding="4dp"
+            android:text="CONFIRM"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            app:cornerRadius="15dp"
+            app:iconPadding="8dp" />
+    </LinearLayout>
+</LinearLayout>

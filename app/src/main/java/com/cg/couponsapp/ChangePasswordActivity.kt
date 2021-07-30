@@ -1,5 +1,6 @@
 package com.cg.couponsapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -50,7 +51,7 @@ class ChangePasswordActivity : AppCompatActivity() {
                                 Toast.LENGTH_LONG
                             ).show()
                         }
-//                        startActivity(Intent(this, UserProfileActivity::class.java))
+                        startActivity(Intent(this, MainActivity::class.java))
                     }
             }
                 .addOnFailureListener {

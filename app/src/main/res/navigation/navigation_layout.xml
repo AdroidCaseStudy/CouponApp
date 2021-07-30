@@ -17,4 +17,9 @@
         android:name="com.cg.couponsapp.CouponsFragment"
         android:label="fragment_coupons"
         tools:layout="@layout/fragment_coupons" />
+    <fragment
+        android:id="@+id/navSettings"
+        android:name="com.cg.couponsapp.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
