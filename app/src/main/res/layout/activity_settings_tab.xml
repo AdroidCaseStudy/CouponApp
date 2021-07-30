@@ -117,7 +117,7 @@
         app:drawableStartCompat="@android:drawable/sym_action_chat" />
 
     <TextView
-        android:id="@+id/aboutUs_TV"
+        android:id="@+id/rateUs_TV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="20dp"
@@ -132,7 +132,7 @@
         app:drawableStartCompat="@android:drawable/btn_star" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/aboutUs_TV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@android:drawable/ic_input_get"

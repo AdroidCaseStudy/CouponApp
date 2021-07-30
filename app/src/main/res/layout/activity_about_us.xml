@@ -20,7 +20,7 @@
         app:lottie_rawRes="@raw/about_us" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/aboutUs_TV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/aboutUs_TV" />
 
     <View
         android:id="@+id/divider3"

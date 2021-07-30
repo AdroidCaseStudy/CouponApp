@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_settings_tab.view.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.fragment_settings.view.*
 
@@ -22,20 +23,20 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_settings, container, false)
+        val view = inflater.inflate(R.layout.activity_settings_tab, container, false)
 
 
-        view.editProfileBtn.setOnClickListener{
+        view.editProf_TV.setOnClickListener{
             val intent = Intent(activity, EditProfileActivity::class.java)
             startActivity(intent)
         }
 
-        view.changePswdBtn.setOnClickListener{
+        view.changePass_TV.setOnClickListener{
             val intent = Intent(activity, ChangePasswordActivity::class.java)
             startActivity(intent)
         }
 
-        view.sendFeedbackBtn.setOnClickListener {
+        view.sendFeedback_TV.setOnClickListener {
 
 
             val email = Intent(Intent.ACTION_SEND)
@@ -49,7 +50,7 @@ class SettingsFragment : Fragment() {
 
         }
 
-        view.rateAppBtn.setOnClickListener {
+        view.rateUs_TV.setOnClickListener {
             val packageName = "com.cg.couponsapp"
             val uri: Uri = Uri.parse("market://details?id=$packageName")
             val goToMarket = Intent(Intent.ACTION_VIEW, uri)
@@ -73,13 +74,13 @@ class SettingsFragment : Fragment() {
         }
 
 
-        view.aboutUsBtn.setOnClickListener {
+        view.aboutUs_TV.setOnClickListener {
             val intent = Intent(activity, AboutUsActivity::class.java)
             startActivity(intent)
         }
 
 
-        view.logoutBtn.setOnClickListener {
+        view.logout_TV.setOnClickListener {
             val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
 
             builder.setMessage("Do you want to Logout ?")
