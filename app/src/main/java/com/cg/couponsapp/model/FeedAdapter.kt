@@ -39,6 +39,7 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
         val imageV = view.findViewById<ImageView>(R.id.feedImageView)
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val v = inflater.inflate(R.layout.fragment_feed,parent,false)
@@ -46,6 +47,7 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
             .setUsage(C.USAGE_MEDIA)
             .setContentType(C.CONTENT_TYPE_MOVIE)
             .build()
+        videoPlayer = SimpleExoPlayer.Builder(parent.context).build()
         return ViewHolder(v)
     }
 
@@ -73,7 +75,6 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
             holder.videoV.visibility =View.VISIBLE
             holder.imageV.visibility =View.INVISIBLE
             videoUrl = "${feed.url}"
-            videoPlayer = SimpleExoPlayer.Builder(holder.itemView.context).build()
             holder.videoV?.player = videoPlayer
             Log.d("FeedList","$videoUrl")
             playYoutubeVideo(videoUrl,holder,videoPlayer)

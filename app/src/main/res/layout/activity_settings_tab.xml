@@ -17,7 +17,7 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/profile_user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -25,10 +25,10 @@
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintTop_toBottomOf="@+id/profile_user_name" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/profile_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"

@@ -10,13 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_settings_tab.*
 import kotlinx.android.synthetic.main.activity_settings_tab.view.*
-import kotlinx.android.synthetic.main.fragment_settings.*
-import kotlinx.android.synthetic.main.fragment_settings.view.*
 
 
 class SettingsFragment : Fragment() {
 
+
+    lateinit var fAuth : FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +26,7 @@ class SettingsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.activity_settings_tab, container, false)
 
-
+        fAuth = FirebaseAuth.getInstance()
         view.editProf_TV.setOnClickListener{
             val intent = Intent(activity, EditProfileActivity::class.java)
             startActivity(intent)
@@ -100,10 +101,10 @@ class SettingsFragment : Fragment() {
 
             builder
                 .setNegativeButton(
-                    "No",
-                    { dialog, which ->
-                        dialog.cancel()
-                    })
+                    "No"
+                ) { dialog, which ->
+                    dialog.cancel()
+                }
 
             val alertDialog: AlertDialog = builder.create()
 
@@ -114,6 +115,12 @@ class SettingsFragment : Fragment() {
 
         return view
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        profile_user_name.setText(fAuth.currentUser?.displayName.toString())
+        profile_user_email.setText(fAuth.currentUser?.email.toString())
     }
 
 }
