@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@drawable/appbg">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,6 +24,8 @@
                 android:layout_marginTop="32dp"
                 android:hint="@string/user_email"
                 android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/profile_user_name" />
@@ -34,6 +37,8 @@
                 android:layout_marginTop="28dp"
                 android:hint="@string/username"
                 android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -58,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:drawablePadding="5dp"
             android:fontFamily="sans-serif"
             android:hapticFeedbackEnabled="true"
             android:paddingStart="20dp"
@@ -76,6 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
+            android:drawablePadding="5dp"
             android:paddingStart="20dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
@@ -92,6 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@android:drawable/sym_action_email"
+            android:drawablePadding="5dp"
             android:fontFamily="sans-serif"
             android:paddingStart="20dp"
             android:paddingTop="20dp"
@@ -109,6 +117,7 @@
             android:id="@+id/sendFeedback_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
             android:paddingStart="20dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
@@ -124,14 +133,15 @@
             android:id="@+id/rateUs_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
             android:paddingStart="20dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
+            android:text="@string/Rate_Us"
             android:textAlignment="textStart"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="@string/Rate_Us"
             app:drawableEndCompat="@drawable/mdtp_ic_chevron_right_black_24dp"
             app:drawableStartCompat="@android:drawable/btn_star" />
 
@@ -140,6 +150,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@android:drawable/ic_input_get"
+            android:drawablePadding="5dp"
             android:paddingStart="20dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
@@ -155,6 +166,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@android:drawable/ic_lock_power_off"
+            android:drawablePadding="5dp"
             android:paddingStart="25dp"
             android:paddingTop="20dp"
             android:paddingEnd="20dp"
