@@ -32,7 +32,7 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
 
     lateinit var videoUrl:String
     lateinit var audioAttributes: AudioAttributes
-    lateinit var videoPlayer: SimpleExoPlayer
+    var videoPlayer: SimpleExoPlayer? = null
     lateinit var name : String
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -45,12 +45,13 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
+        videoPlayer = SimpleExoPlayer.Builder(parent.context).build()
         val v = inflater.inflate(R.layout.fragment_feed,parent,false)
         audioAttributes = AudioAttributes.Builder()
             .setUsage(C.USAGE_MEDIA)
             .setContentType(C.CONTENT_TYPE_MOVIE)
             .build()
-        videoPlayer = SimpleExoPlayer.Builder(parent.context).build()
+
         return ViewHolder(v)
     }
 
@@ -78,9 +79,10 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
             holder.videoV.visibility =View.VISIBLE
             holder.imageV.visibility =View.INVISIBLE
             videoUrl = "${feed.url}"
+            videoPlayer = SimpleExoPlayer.Builder(holder.itemView.context).build()
             holder.videoV?.player = videoPlayer
             Log.d("FeedList","$videoUrl")
-            playYoutubeVideo(videoUrl,holder,videoPlayer)
+            playYoutubeVideo(videoUrl,holder,videoPlayer!!)
             //initializePlayer(holder)
         }
 
@@ -135,7 +137,7 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
     }
 
     //VIDEO EXOPLAYER
-    fun initializePlayer(holder: ViewHolder) {
+    /*fun initializePlayer(holder: ViewHolder) {
         var videoPlayer: SimpleExoPlayer? = null
         videoPlayer = SimpleExoPlayer.Builder(holder.itemView.context).build()
         holder.videoV?.player = videoPlayer
@@ -147,7 +149,7 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
         val dataSourceFactory = DefaultDataSourceFactory(holder.itemView.context, "sample")
         return ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(Uri.parse(videoUrl))
-    }
+    }*/
 
 
     override fun getItemCount() = feedList.size
@@ -155,19 +157,18 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
         super.onViewDetachedFromWindow(holder)
         if(!holder.videoV.isFocused){
             Log.d("Firstfunc","Here2")
-            if(videoPlayer.isPlaying)
-                videoPlayer.pause()
+            holder.videoV.player?.pause()
         }
     }
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         super.onDetachedFromRecyclerView(recyclerView)
         if(!recyclerView.isFocused){
-            Log.d("Firstfunc","Here")
-//            if(videoPlayer.isPlaying)
-//            {
-//                videoPlayer.stop()
-//            }
+            if(videoPlayer!=null)
+            {
+                Log.d("Firstfunc","Here")
+                videoPlayer?.stop()
+            }
         }
     }
 
