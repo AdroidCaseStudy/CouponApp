@@ -1,6 +1,6 @@
 package com.cg.couponsapp
 
-import android.app.AlertDialog
+
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
@@ -9,14 +9,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 
 import kotlinx.android.synthetic.main.activity_settings_tab.*
 import kotlinx.android.synthetic.main.activity_settings_tab.view.*
@@ -90,33 +90,23 @@ class SettingsFragment : Fragment() {
 
 
         view.logout_TV.setOnClickListener {
-            val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
 
-            builder.setMessage("Do you want to Logout ?")
+            val builder = MaterialAlertDialogBuilder(it.context)
+            val layoutInflater = LayoutInflater.from(context)
+            val customView = layoutInflater.inflate(R.layout.logout_dialog,null,false)
+            builder.setView(customView)
 
-            builder.setTitle("Logout")
-
-            builder.setCancelable(false)
-
-            builder
-                .setPositiveButton(
-                    "Yes"
-                ) { dialog, which ->
-                    FirebaseAuth.getInstance().signOut()
-                    val intent = Intent(activity, SignInActivity::class.java)
-                    startActivity(intent)
-                }
-
-            builder
-                .setNegativeButton(
-                    "No"
-                ) { dialog, which ->
-                    dialog.cancel()
-                }
-
-            val alertDialog: AlertDialog = builder.create()
-
-            alertDialog.show()
+            val materialDialog = builder.create()
+            customView.findViewById<Button>(R.id.settings_exit_button).setOnClickListener {
+                activity?.finish()
+            }
+            customView.findViewById<Button>(R.id.settings_logout_button).setOnClickListener{
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(activity, SignInActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }
+            materialDialog.show()
 
         }
 
@@ -138,6 +128,8 @@ class SettingsFragment : Fragment() {
 
                 profile_user_name.setText(username)
                 profile_user_email.setText(dataSnapshot.child("email").value.toString())
+                coin_count.setText(dataSnapshot.child("coins").value.toString())
+                reference.removeEventListener(this)
 
             }
 

@@ -41,7 +41,7 @@
         android:layout_width="325dp"
         android:layout_height="137dp"
         android:layout_marginTop="80dp"
-        android:text="CoupCash is a company with a motive to empower the buyers on the internet with an option to get the cheapest available items online at the best price. While there is more to do with the cashbacks and offers, CoupCash is the place you need to be before shopping on any deals and website."
+        android:text="CashCoup is a company with a motive to empower the buyers on the internet with an option to get the cheapest available items online at the best price. While there is more to do with the cashbacks and offers, CoupCash is the place you need to be before shopping on any deals and website."
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="16sp"
