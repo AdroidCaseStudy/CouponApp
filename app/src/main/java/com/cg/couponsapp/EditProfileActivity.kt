@@ -10,25 +10,25 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
+
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
+
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_edit_profile.*
-import kotlinx.android.synthetic.main.fragment_settings.view.*
+import java.io.IOException
+
 
 class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
 
-    private val firestore = FirebaseFirestore.getInstance()
 
     private var selectedImageFileUri: Uri? = null
     private var userProfileImageURL: String = ""
@@ -43,11 +43,12 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
 
         reference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
                 val username =
                         dataSnapshot.child(Constants.USERNAME).value.toString()
 
                     editUserNameET.setText(username)
+                val phone = dataSnapshot.child(Constants.PHONE).value.toString()
+                editPhoneET.setText(phone)
 
             }
 
@@ -62,6 +63,18 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
         editEmailET.isEnabled = false
         editEmailET.setText(user?.email)
 
+        val locationPref = applicationContext.getSharedPreferences(Constants.LOCATION_PREF,0)
+        val location = locationPref.getString("Location",null)
+        editLocationET.setText(location)
+
+
+        val profile_image_ref = getSharedPreferences(Constants.PROFILE_IMAGE_REF,0)
+        val uri = profile_image_ref?.getString("profile_image","")
+
+        Glide.with(this )
+            .load(uri)
+            .into(profileImage)
+
         profileImage.setOnClickListener(this@EditProfileActivity)
         saveProfileButton.setOnClickListener(this@EditProfileActivity)
     }
@@ -71,7 +84,9 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
             R.id.profileImage ->{
                 if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED){
-                    //showErrorSnackbar("Storage permission already granted",false,profileImg)
+
+                        Toast.makeText(this,"Storage permission already granted",
+                            Toast.LENGTH_LONG).show()
                     Constants.showImageChooser(this)
                 }else{
                     ActivityCompat.requestPermissions(
@@ -83,9 +98,6 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
 
             R.id.saveProfileButton ->{
 
-
-
-
                 if(validateUserDetails()){
 
                     if(selectedImageFileUri != null) {
@@ -94,30 +106,76 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
                     else{
                         updateUserProfileDetails()
                     }
-
                 }
-
             }
-
         }
-
     }
+
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if(requestCode == Constants.READ_STORAGE_PERMISSION_CODE){
+            if(grantResults.isNotEmpty() && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+
+                Constants.showImageChooser(this)
+            }else{
+                Toast.makeText(this,"Storage permission Denied",Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode== Constants.PICK_IMAGE_REQUEST_CODE){
+                if(data!=null){
+                    try{
+                        selectedImageFileUri = data.data!!
+                        // profileImg.setImageURI((selectedImageFileUri))
+                        loadUserPicture(selectedImageFileUri!!,profileImage)
+                    } catch (e: IOException){
+                        e.printStackTrace()
+                        Toast.makeText(this,"Image selection failed",Toast.LENGTH_LONG).show()
+
+                    }
+                }
+            }
+        }
+    }
+
+    fun loadUserPicture(imageUri: Uri, imageView: ImageView){
+        try{
+            Glide.with(applicationContext)
+                .load(imageUri)
+                .centerCrop()
+                .into(imageView)
+        }catch (e:IOException){
+            e.printStackTrace()
+        }
+    }
+
+
 
     fun updateUserProfileDetails(){
         val userHashMap = HashMap<String,Any>()
         val username = editUserNameET.text.toString().trim{it<=' '}
-        val mobile = editPhoneET.text.toString().trim{it<= ' '}
+        val phone = editPhoneET.text.toString().trim{it<= ' '}
         val location = editLocationET.text.toString().trim{it<=' '}
 
         if(username.isNotEmpty()){
             userHashMap[Constants.USERNAME] = username
 
         }
-        if(mobile.isNotEmpty()){
-            userHashMap[Constants.MOBILE] = mobile.toLong()
+        if(phone.isNotEmpty()){
+            userHashMap[Constants.PHONE] = phone.toLong()
         }
         if(location.isNotEmpty()){
-            userHashMap[Constants.LOCATION] = location
+            val locationPref = applicationContext.getSharedPreferences(Constants.LOCATION_PREF,0)
+            val editor = locationPref.edit()
+            editor.putString("Location",location)
+            editor.apply()
         }
 
 
@@ -132,27 +190,17 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun updateUserProfile(activity: Activity, userHashMap:HashMap<String,Any>){
-        firestore.collection(Constants.USERS).document(getCurrentUserID())
-            .update(userHashMap)
-            .addOnFailureListener { e->
 
-                Log.e(
-                    activity.javaClass.simpleName, "Error while updating user details",e
-                )
-            }
-    }
 
-    fun getCurrentUserID():String{
-        val currentUser = FirebaseAuth.getInstance().currentUser
+        val user = FirebaseAuth.getInstance().currentUser
+        val reference = FirebaseDatabase.getInstance().getReference(Constants.USERS).child(user?.uid!!)
+        reference.updateChildren(userHashMap)
 
-        var currentUserID = ""
-        if(currentUser!=null){
-            currentUserID = currentUser.uid
-
-        }
-        return currentUserID
+        //reference.setValue(userHashMap)
 
     }
+
+
 
     private fun validateUserDetails():Boolean{
         return when{
@@ -177,7 +225,7 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
     fun uploadImgaeToCloudStorage(activity: Activity, imageFileUri: Uri?){
         val fStorage = FirebaseStorage.getInstance()
             .reference.child(
-                Constants.PROFILE_IMAGE + System.currentTimeMillis()
+                FirebaseAuth.getInstance().currentUser?.email
                         + "." + Constants.getFileExtension(activity,imageFileUri)
             )
 
@@ -186,12 +234,15 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
 
             taskSnapshot.metadata!!.reference!!.downloadUrl
                 .addOnSuccessListener { uri ->
-                    Log.e("Downloadable image URI", uri.toString())
-                    when(activity){
-                        is EditProfileActivity -> {
-                            activity.imageUploadSuccess(uri.toString())
-                        }
-                    }
+                 val profile_image_ref =  applicationContext
+                     .getSharedPreferences(Constants.PROFILE_IMAGE_REF,0)
+
+                 val editor = profile_image_ref.edit()
+                 editor.putString("profile_image",uri.toString())
+                 editor.apply()
+
+
+                            imageUploadSuccess(uri.toString())
                 }
         }
             .addOnFailureListener{exception ->

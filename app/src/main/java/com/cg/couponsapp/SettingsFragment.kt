@@ -9,7 +9,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+
 import kotlinx.android.synthetic.main.activity_settings_tab.*
 import kotlinx.android.synthetic.main.activity_settings_tab.view.*
 
@@ -119,8 +127,32 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        profile_user_name.setText(fAuth.currentUser?.displayName.toString())
+
+        val user = FirebaseAuth.getInstance().currentUser
+        val reference = FirebaseDatabase.getInstance().getReference(Constants.USERS).child(user?.uid!!)
+
+        reference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val username =
+                    dataSnapshot.child(Constants.USERNAME).value.toString()
+
+                profile_user_name.setText(username)
+
+            }
+
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+
         profile_user_email.setText(fAuth.currentUser?.email.toString())
+
+
+        val profile_image_ref = activity?.getSharedPreferences(Constants.PROFILE_IMAGE_REF,0)
+        val uri = profile_image_ref?.getString("profile_image","")
+
+        Glide.with(this )
+            .load(uri)
+            .into(profile_user_image)
     }
 
 }
