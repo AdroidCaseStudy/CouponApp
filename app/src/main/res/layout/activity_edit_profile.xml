@@ -15,7 +15,7 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FF5722"
+            android:background="@color/signBtnBG"
             android:gravity="center_horizontal"
             android:padding="2dp"
             android:text="COMPLETE PROFILE "
@@ -29,7 +29,6 @@
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:onClick="onClick"
             app:srcCompat="@android:drawable/ic_menu_camera" />
 
         <EditText
@@ -73,8 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
 
-            android:backgroundTint="@color/teal_700"
-            android:onClick="onClick"
+            android:backgroundTint="#008000"
             android:text="SAVE" />
 
 
