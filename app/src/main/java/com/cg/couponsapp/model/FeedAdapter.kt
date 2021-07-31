@@ -25,6 +25,7 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.firebase.database.FirebaseDatabase
 
 
 class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
@@ -32,6 +33,8 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
     lateinit var videoUrl:String
     lateinit var audioAttributes: AudioAttributes
     lateinit var videoPlayer: SimpleExoPlayer
+    lateinit var name : String
+
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val descpT = view.findViewById<TextView>(R.id.feedDescTV)
         val nameT = view.findViewById<TextView>(R.id.feedUNameTV)
@@ -152,7 +155,8 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
         super.onViewDetachedFromWindow(holder)
         if(!holder.videoV.isFocused){
             Log.d("Firstfunc","Here2")
-            videoPlayer.pause()
+            if(videoPlayer.isPlaying)
+                videoPlayer.pause()
         }
     }
 
@@ -160,7 +164,10 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
         super.onDetachedFromRecyclerView(recyclerView)
         if(!recyclerView.isFocused){
             Log.d("Firstfunc","Here")
-            videoPlayer.stop()
+//            if(videoPlayer.isPlaying)
+//            {
+//                videoPlayer.stop()
+//            }
         }
     }
 

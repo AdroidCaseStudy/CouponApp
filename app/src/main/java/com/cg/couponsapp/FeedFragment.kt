@@ -1,6 +1,7 @@
 package com.cg.couponsapp
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -17,10 +18,7 @@ import com.cg.couponsapp.model.Feed
 import com.cg.couponsapp.model.FeedAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.fragment_feed_list.*
@@ -36,6 +34,10 @@ class FeedFragment : Fragment() {
     lateinit var StorageReference : StorageReference
     lateinit var fAuth : FirebaseAuth
     lateinit var dialogView : View
+    lateinit var name : String
+    lateinit var materialDialog : androidx.appcompat.app.AlertDialog
+    lateinit var listener : ValueEventListener
+    lateinit var ref : DatabaseReference
     var radioId = -1
 
 
@@ -46,6 +48,18 @@ class FeedFragment : Fragment() {
         // Inflate the layout for this fragment
         fDatabase = FirebaseDatabase.getInstance()
         fAuth = FirebaseAuth.getInstance()
+        val ref = fDatabase.reference.child("users").child("${fAuth.currentUser?.uid}")
+            .addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        name = snapshot.child("name").value.toString()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+            })
 
         return inflater.inflate(R.layout.fragment_feed_list, container, false)
     }
@@ -66,7 +80,7 @@ class FeedFragment : Fragment() {
         val cancelDialoag = customView.findViewById<Button>(R.id.post_cancel)
         dialog.setView(customView)
         dialogView = customView
-        val materialDialog = dialog.create()
+        materialDialog = dialog.create()
         materialDialog.setCancelable(false)
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
             radioId = checkedId
@@ -126,9 +140,12 @@ class FeedFragment : Fragment() {
         }
     }
     private fun postFeed(isImage : Boolean,id:String){
-        fDatabase.reference.child("feeds").child(UUID.randomUUID().toString()).setValue(Feed(fAuth?.currentUser?.displayName!!,
+        fDatabase.reference.child("feeds").child(UUID.randomUUID().toString()).setValue(Feed(name,
         id,isImage,dialogView.findViewById<EditText>(R.id.post_desc)?.text.toString()
             ))
+        materialDialog.dismiss()
+        rView.adapter?.notifyDataSetChanged()
+
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -153,10 +170,11 @@ class FeedFragment : Fragment() {
 
         //FIREBASE
 
-        val ref = fDatabase.reference.child("feeds")
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+        ref = fDatabase.reference.child("feeds")
+        listener = ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
+                    feedList.clear()
                     for (child in snapshot.children) {
                         val feed =child.getValue(Feed::class.java)
                         feedList.add(feed!!)
@@ -175,8 +193,18 @@ class FeedFragment : Fragment() {
 //        rView.adapter = FeedAdapter(listOf(Feed(url="https://i.imgur.com/YkjBfxg.jpeg"),Feed(url="https://www.youtube.com/watch?v=8MLa-Lh8lkU&ab_channel=EDMTDev",isImage = false),))
     }
 
+    override fun onResume() {
+        super.onResume()
+        rView.adapter = FeedAdapter(feedList)
+    }
+
     override fun onPause() {
         super.onPause()
         rView.adapter = null
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        ref.removeEventListener(listener)
     }
 }
