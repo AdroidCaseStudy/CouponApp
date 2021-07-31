@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="350dp"
     android:layout_gravity="center"
+    android:background="@drawable/appbg"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -13,12 +14,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:background="@drawable/curve_reactangle_night"
-        android:backgroundTint="@color/Blue700"
         android:gravity="center"
         android:padding="8dp"
         android:text="Add New Feed"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -33,13 +32,17 @@
             android:id="@+id/post_radio_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Image" />
+            android:hapticFeedbackEnabled="true"
+            android:text="Image"
+            android:textColor="@color/black" />
 
         <RadioButton
             android:id="@+id/post_radio_video"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Video" />
+            android:hapticFeedbackEnabled="true"
+            android:text="Video"
+            android:textColor="@color/black" />
     </RadioGroup>
 
     <LinearLayout
@@ -75,9 +78,11 @@
         android:layout_marginRight="10dp"
         android:layout_weight="0"
         android:ems="10"
-        android:hint="Youtube Video Url"
+        android:hint="Youtube Video URL"
         android:inputType="textPersonName"
-        android:visibility="gone"/>
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/post_desc"
@@ -92,7 +97,7 @@
         android:inputType="textPersonName"
         android:padding="8dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/textHint" />
+        android:textColorHint="@color/black" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -110,6 +115,7 @@
             android:layout_marginBottom="20dp"
             android:layout_weight="0"
             android:backgroundTint="#C70000"
+            android:hapticFeedbackEnabled="true"
             android:text="Cancel"
             app:cornerRadius="15dp" />
 
@@ -122,6 +128,7 @@
             android:layout_marginBottom="20dp"
             android:layout_weight="0"
             android:backgroundTint="@color/signBtnBG"
+            android:hapticFeedbackEnabled="true"
             android:text="POST"
             app:cornerRadius="15dp" />
     </LinearLayout>

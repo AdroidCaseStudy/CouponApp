@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
+    app:cardBackgroundColor="@color/indicatorColor"
     app:cardCornerRadius="10dp"
     tools:context=".CouponsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/couponTitle"
@@ -29,6 +31,7 @@
             android:id="@+id/couponImg"
             android:layout_width="0dp"
             android:layout_height="200dp"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +40,7 @@
 
         <TextView
             android:id="@+id/couponDesc"
-            android:layout_width="wrap_content"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textColor="@color/black"
@@ -60,7 +63,7 @@
             app:layout_constraintTop_toBottomOf="@+id/couponDesc" />
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/claim_animation"
+            android:id="@+id/claim_coupon"
             android:layout_width="375dp"
             android:layout_height="200dp"
             android:layout_marginBottom="50dp"

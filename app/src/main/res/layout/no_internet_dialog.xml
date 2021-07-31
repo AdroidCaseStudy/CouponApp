@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/appbg"
     android:gravity="center"
     android:orientation="vertical">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/claim_animation"
+        android:id="@+id/no_internet"
         android:layout_width="375dp"
         android:layout_height="320dp"
         android:layout_marginTop="5dp"
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Ooops!"
+        android:textColor="@color/black"
         android:textSize="40sp" />
 
     <TextView
@@ -30,6 +32,7 @@
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="No Internet Connection"
+        android:textColor="@color/black"
         android:textSize="15sp" />
 
     <TextView
@@ -38,13 +41,17 @@
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="Check Internet and Hit Restart"
+        android:textColor="@color/black"
         android:textSize="15sp" />
 
     <Button
         android:id="@+id/restartapp"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:text="Restart"
+        android:backgroundTint="@color/signBtnBG"
+        android:text="RESTART"
+        android:textColor="@color/white"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:cornerRadius="15dp" />
 </LinearLayout>

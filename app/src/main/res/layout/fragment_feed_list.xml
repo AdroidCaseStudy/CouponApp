@@ -10,7 +10,7 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".FeedFragment"
-    tools:listitem="@layout/fragment_feed" >
+    tools:listitem="@layout/fragment_feed">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/feedFAB"
