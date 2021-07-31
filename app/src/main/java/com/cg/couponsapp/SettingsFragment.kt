@@ -137,6 +137,7 @@ class SettingsFragment : Fragment() {
                     dataSnapshot.child(Constants.USERNAME).value.toString()
 
                 profile_user_name.setText(username)
+                profile_user_email.setText(dataSnapshot.child("email").value.toString())
 
             }
 
@@ -144,7 +145,7 @@ class SettingsFragment : Fragment() {
             override fun onCancelled(databaseError: DatabaseError) {}
         })
 
-        profile_user_email.setText(fAuth.currentUser?.email.toString())
+//        profile_user_email.setText(fAuth.currentUser?.email.toString())
 
 
         val profile_image_ref = activity?.getSharedPreferences(Constants.PROFILE_IMAGE_REF,0)
