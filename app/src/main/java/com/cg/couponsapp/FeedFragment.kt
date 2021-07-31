@@ -14,7 +14,7 @@ import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cg.couponsapp.model.Feed
-import com.cg.couponsapp.model.FeedAdapter
+import com.cg.couponsapp.utils.FeedAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
