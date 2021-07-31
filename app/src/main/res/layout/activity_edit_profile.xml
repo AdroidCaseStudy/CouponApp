@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/appbg"
     tools:context=".EditProfileActivity">
 
     <LinearLayout
@@ -15,7 +16,6 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/signBtnBG"
             android:gravity="center_horizontal"
             android:padding="2dp"
             android:text="COMPLETE PROFILE "
@@ -36,35 +36,53 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:background="@drawable/round_edittext"
             android:ems="10"
             android:hint="FIrst Name"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/textHint" />
 
         <EditText
             android:id="@+id/editEmailET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:background="@drawable/round_edittext"
             android:ems="10"
+            android:enabled="false"
             android:hint="Email ID"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:padding="8dp"
+            android:textColor="@color/textHint"
+            android:textColorHint="@color/textHint" />
 
         <EditText
             android:id="@+id/editPhoneET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:background="@drawable/round_edittext"
             android:ems="10"
             android:hint="Mobile No."
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/textHint" />
 
         <EditText
             android:id="@+id/editLocationET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/round_edittext"
             android:ems="10"
             android:hint="Location"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/textHint" />
 
         <Button
             android:id="@+id/saveProfileButton"
@@ -73,8 +91,8 @@
             android:layout_margin="10dp"
 
             android:backgroundTint="#008000"
-            android:text="SAVE" />
-
+            android:text="SAVE"
+            app:cornerRadius="15dp" />
 
 
     </LinearLayout>

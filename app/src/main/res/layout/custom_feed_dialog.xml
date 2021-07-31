@@ -13,9 +13,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
+        android:background="@drawable/curve_reactangle_night"
+        android:backgroundTint="@color/Blue700"
         android:gravity="center"
+        android:padding="8dp"
         android:text="Add New Feed"
-        android:textColor="@color/signBtnBG"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -29,7 +32,7 @@
         <RadioButton
             android:id="@+id/post_radio_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Image" />
 
         <RadioButton
@@ -83,9 +86,13 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_weight="0"
+        android:background="@drawable/round_edittext"
         android:ems="10"
         android:hint="Add Description"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/textHint" />
 
     <LinearLayout
         android:layout_width="wrap_content"
