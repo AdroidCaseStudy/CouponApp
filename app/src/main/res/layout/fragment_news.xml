@@ -23,7 +23,7 @@
             android:fontFamily="serif"
             android:padding="2dp"
             android:text="TextView"
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
