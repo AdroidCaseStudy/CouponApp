@@ -85,6 +85,7 @@ class NewsFragment: Fragment(), AdapterView.OnItemSelectedListener {
         //Toast.makeText(this,"$country asdad",Toast.LENGTH_LONG).show()
         //country = "in"
         val request = NewsInterface.getInstance().getTopHeadlines("in",keywords, key)
+        newsPBar.visibility = View.VISIBLE
         request.enqueue(TopNewsCallback())
     }
 

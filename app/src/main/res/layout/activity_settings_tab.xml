@@ -146,7 +146,8 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:thumbTint="@color/signBtnBG"
-            android:thumbTintMode="src_in" />
+            android:thumbTintMode="src_in"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/sendFeedback_TV"

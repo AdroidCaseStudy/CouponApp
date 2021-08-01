@@ -10,7 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import com.bumptech.glide.Glide
+import com.cg.couponsapp.utils.MakeProgressBar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -26,6 +28,7 @@ class SettingsFragment : Fragment() {
 
 
     lateinit var fAuth : FirebaseAuth
+    lateinit var pBar : ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +38,8 @@ class SettingsFragment : Fragment() {
         val view = inflater.inflate(R.layout.activity_settings_tab, container, false)
 
         fAuth = FirebaseAuth.getInstance()
+        pBar = MakeProgressBar(activity?.findViewById(android.R.id.content)!!).make()
+        pBar.visibility = View.VISIBLE
         view.editProf_TV.setOnClickListener{
             val intent = Intent(activity, EditProfileActivity::class.java)
             startActivity(intent)
@@ -130,12 +135,14 @@ class SettingsFragment : Fragment() {
                 profile_user_email.setText(dataSnapshot.child("email").value.toString())
                 coin_count.setText(dataSnapshot.child("coins").value.toString())
                 reference.removeEventListener(this)
+                pBar.visibility = View.GONE
 
             }
 
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
+
 
 //        profile_user_email.setText(fAuth.currentUser?.email.toString())
 

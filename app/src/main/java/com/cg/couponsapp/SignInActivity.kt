@@ -5,11 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.cg.couponsapp.model.Users
+import com.cg.couponsapp.utils.MakeProgressBar
 import com.cg.couponsapp.utils.NetworkUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -30,6 +33,7 @@ class SignInActivity : AppCompatActivity(){
     lateinit var googleSignInClient : GoogleSignInClient
     val RC_SIGN_IN :Int = 12  // constant value for google sign in response. Can be any independent constant value
     lateinit var gso : GoogleSignInOptions
+    lateinit var pBar : ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +41,8 @@ class SignInActivity : AppCompatActivity(){
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
+        pBar = MakeProgressBar(findViewById(android.R.id.content)).make()
+        pBar.visibility = View.GONE
         val networkState = NetworkUtil().checkStatus(this,this.intent)
         if(networkState) {
             if (auth.currentUser != null) {
@@ -80,17 +86,20 @@ class SignInActivity : AppCompatActivity(){
         }
 
         //----LOGIN USER---
+        pBar.visibility = View.VISIBLE
         auth.signInWithEmailAndPassword(emailLoginE.text.toString(), passwordLoginE.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     Toast.makeText(this, "Authentication Successful", Toast.LENGTH_SHORT).show()
                     val i = Intent(this,NavigationActivity::class.java)
+                    pBar.visibility = View.GONE
                     startActivity(i)
                     finish()
                 //updateUI(user)
                 } else { //wrong details
                     Toast.makeText(this, "${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    pBar.visibility = View.GONE
                 }
             }
     }

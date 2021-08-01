@@ -1,19 +1,30 @@
 package com.cg.couponsapp
 
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cg.couponsapp.utils.CouponsAdapter
+import com.cg.couponsapp.utils.MakeProgressBar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class CouponsFragment : Fragment() {
 
     lateinit var couponsList : RecyclerView
     lateinit var couponAdapter : CouponsAdapter
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -43,13 +54,12 @@ class CouponsFragment : Fragment() {
         couponAdapter.displayAllCoupons(couponsList)
     }
 
-    companion object {
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CouponsFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
+    override fun onPause() {
+        super.onPause()
     }
+
+
+
 }
+
+
