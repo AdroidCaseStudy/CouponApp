@@ -112,42 +112,10 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
         YouTubeExtractor1().extract(videoUrl)
         videoPlayer.setAudioAttributes(audioAttributes,true)
 
-//        if(!holder.itemView.isFocused) {
-//            Log.d("Firstfunc","Here")
-//            videoPlayer?.run {
-//                playbackPosition = this.currentPosition
-//                currentWindow = this.currentWindowIndex
-//                playWhenReady = this.playWhenReady
-//                release()
-//            }
-//            videoPlayer.pause()
-//        }
-//        if(!holder.videoV.hasFocus())  {
-//            Log.d("Firstfunc","Here2")
-//            videoPlayer?.run {
-//                playbackPosition = this.currentPosition
-//                currentWindow = this.currentWindowIndex
-//                playWhenReady = this.playWhenReady
-//                release()
-//            }
-//            videoPlayer.pause()
-//        }
+
     }
 
-    //VIDEO EXOPLAYER
-    /*fun initializePlayer(holder: ViewHolder) {
-        var videoPlayer: SimpleExoPlayer? = null
-        videoPlayer = SimpleExoPlayer.Builder(holder.itemView.context).build()
-        holder.videoV?.player = videoPlayer
-        buildMediaSource(holder)?.let {
-            videoPlayer?.prepare(it)
-        }
-    }
-    fun buildMediaSource(holder: ViewHolder): MediaSource? {
-        val dataSourceFactory = DefaultDataSourceFactory(holder.itemView.context, "sample")
-        return ProgressiveMediaSource.Factory(dataSourceFactory)
-            .createMediaSource(Uri.parse(videoUrl))
-    }*/
+
 
 
     override fun getItemCount() = feedList.size

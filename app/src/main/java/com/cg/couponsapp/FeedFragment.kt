@@ -163,7 +163,7 @@ class FeedFragment : Fragment() {
             filePath = data?.data!!
         }
     else{
-        Toast.makeText(activity?.findViewById(android.R.id.content)!!,"Error in selecting image",Toast.LENGTH_LONG).show()
+        Toast.makeText(dialogView.context,"Error in selecting image",Toast.LENGTH_LONG).show()
     }
 }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
