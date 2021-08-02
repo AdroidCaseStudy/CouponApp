@@ -23,7 +23,7 @@
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/logout_animation"
         android:layout_width="305dp"
-        android:layout_height="97dp"
+        android:layout_height="142dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

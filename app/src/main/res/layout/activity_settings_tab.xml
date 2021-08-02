@@ -226,13 +226,25 @@
             android:backgroundTint="@color/black"
             android:foregroundTint="@color/black" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/setting_animation"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/changePasswordBtn"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/settings" />
+
         <TextView
             android:id="@+id/textView21"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="35dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/iconTint"
-            android:padding="70dp"
             android:text="CashCoup All Rights Reserved 2021-25"
             android:textAlignment="center"
             android:textColor="@color/inputText" />
