@@ -54,7 +54,7 @@ class NewsAdapter(val newsList: List<News>): RecyclerView.Adapter<NewsAdapter.Vi
         }
 
         holder.cardView.setOnClickListener {
-            Toast.makeText(it.context,"Working", Toast.LENGTH_LONG).show()
+//            Toast.makeText(it.context,"Working", Toast.LENGTH_LONG).show()
             val newUrl = Uri.parse(news.url)
             val intent = Intent(Intent.ACTION_VIEW,newUrl)
             it.context.startActivity(intent)

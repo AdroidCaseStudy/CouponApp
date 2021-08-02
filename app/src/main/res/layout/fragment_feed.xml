@@ -58,7 +58,7 @@
         <TextView
             android:id="@+id/feedDescTV"
             android:layout_width="300dp"
-            android:layout_height="19dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:fontFamily="serif"
             android:text="@string/caption"

@@ -70,7 +70,7 @@
         <TextView
             android:id="@+id/newDescT"
             android:layout_width="370dp"
-            android:layout_height="65dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="3dp"
@@ -78,6 +78,7 @@
             android:hapticFeedbackEnabled="true"
             android:text="@string/news_desc"
             android:textColor="@color/black"
+            android:lines="4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
