@@ -1,7 +1,6 @@
 package com.cg.couponsapp
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -15,7 +14,8 @@ import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cg.couponsapp.model.Feed
-import com.cg.couponsapp.model.FeedAdapter
+import com.cg.couponsapp.utils.FeedAdapter
+import com.cg.couponsapp.utils.MakeProgressBar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -38,6 +38,7 @@ class FeedFragment : Fragment() {
     lateinit var materialDialog : androidx.appcompat.app.AlertDialog
     lateinit var listener : ValueEventListener
     lateinit var ref : DatabaseReference
+    lateinit var pBar : ProgressBar
     var radioId = -1
 
 
@@ -48,6 +49,8 @@ class FeedFragment : Fragment() {
         // Inflate the layout for this fragment
         fDatabase = FirebaseDatabase.getInstance()
         fAuth = FirebaseAuth.getInstance()
+        pBar = MakeProgressBar(activity?.findViewById(android.R.id.content)!!).make()
+        pBar.visibility = View.VISIBLE
         val ref = fDatabase.reference.child("users").child("${fAuth.currentUser?.uid}")
             .addListenerForSingleValueEvent(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -110,7 +113,9 @@ class FeedFragment : Fragment() {
 
     private fun uploadvideo() {
         if(dialogView.findViewById<EditText>(R.id.post_ytTv).text.isNotEmpty()){
+            pBar.visibility = View.VISIBLE
             postFeed(false,dialogView.findViewById<EditText>(R.id.post_ytTv).text.toString())
+            pBar.visibility = View.GONE
         }else{
             Toast.makeText(dialogView.context,"Please enter the video url",Toast.LENGTH_LONG).show()
         }
@@ -123,7 +128,7 @@ class FeedFragment : Fragment() {
     }
     private fun uploadImage(){
         if (filePath != null) {
-
+            pBar.visibility = View.VISIBLE
             StorageReference = FirebaseStorage.getInstance().reference
             val reference = StorageReference.child("images/"+UUID.randomUUID().toString())
             val uploadTask = reference.putFile(filePath).addOnSuccessListener {
@@ -134,6 +139,7 @@ class FeedFragment : Fragment() {
                 reference.downloadUrl
             }.addOnCompleteListener{
                 if(it.isSuccessful){
+                    pBar.visibility = View.GONE
                     postFeed(true,it.result.toString())
                 }
             }
@@ -182,6 +188,7 @@ class FeedFragment : Fragment() {
                     }
                 }
                 rView.adapter = FeedAdapter(feedList)
+                pBar.visibility = View.GONE
 
             }
             override fun onCancelled(error: DatabaseError) {

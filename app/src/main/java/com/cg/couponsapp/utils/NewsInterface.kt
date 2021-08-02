@@ -1,4 +1,4 @@
-package com.cg.couponsapp
+package com.cg.couponsapp.utils
 
 import com.cg.couponsapp.model.Articles
 import retrofit2.Call
@@ -16,7 +16,7 @@ interface NewsInterface {
     companion object{
         val BASE_URL = "https://newsapi.org/"
 
-        fun getInstance() : NewsInterface{
+        fun getInstance() : NewsInterface {
 
             val builder = Retrofit.Builder()
             builder.addConverterFactory(GsonConverterFactory.create())

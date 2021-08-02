@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cg.couponsapp.model.Articles
 import com.cg.couponsapp.utils.NewsAdapter
+import com.cg.couponsapp.utils.NewsInterface
 import kotlinx.android.synthetic.main.fragment_news_list.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -84,6 +85,7 @@ class NewsFragment: Fragment(), AdapterView.OnItemSelectedListener {
         //Toast.makeText(this,"$country asdad",Toast.LENGTH_LONG).show()
         //country = "in"
         val request = NewsInterface.getInstance().getTopHeadlines("in",keywords, key)
+        newsPBar.visibility = View.VISIBLE
         request.enqueue(TopNewsCallback())
     }
 

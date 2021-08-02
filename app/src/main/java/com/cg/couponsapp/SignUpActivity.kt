@@ -5,8 +5,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.cg.couponsapp.model.Users
+import com.cg.couponsapp.utils.MakeProgressBar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -18,6 +21,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var ref : DatabaseReference
+    lateinit var pBar : ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +29,8 @@ class SignUpActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         ref = FirebaseDatabase.getInstance().getReference("users")
+        pBar = MakeProgressBar(findViewById(android.R.id.content)).make()
+        pBar.visibility = View.GONE
 
         signUpBtn.setOnClickListener{
             signUpUser()
@@ -52,6 +58,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         //----CREATE USER---
+        pBar.visibility = View.VISIBLE
         auth.createUserWithEmailAndPassword(emailE.text.toString(), passwordE.text.toString())
             .addOnCompleteListener{ task ->
                 if (task.isSuccessful) {
@@ -59,6 +66,7 @@ class SignUpActivity : AppCompatActivity() {
                     saveUser()
                     updateUI(user)
                 } else {
+                    pBar.visibility = View.GONE
                     Toast.makeText(this, "${task.exception?.message}",
                         Toast.LENGTH_SHORT).show()
                 }
@@ -75,6 +83,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun updateUI(user: FirebaseUser?) {
         Toast.makeText(this, "User Created", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, SignInActivity::class.java)
+        pBar.visibility = View.GONE
 //        intent.putExtra("new",true)
         startActivity(intent)
         finish()
