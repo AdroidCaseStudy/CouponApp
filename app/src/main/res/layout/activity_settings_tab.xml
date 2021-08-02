@@ -232,7 +232,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="35dp"
             android:background="@color/iconTint"
-            android:padding="22dp"
+            android:padding="70dp"
             android:text="CashCoup All Rights Reserved 2021-25"
             android:textAlignment="center"
             android:textColor="@color/inputText" />

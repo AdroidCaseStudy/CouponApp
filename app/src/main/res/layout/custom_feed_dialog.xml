@@ -78,7 +78,7 @@
         android:layout_marginRight="10dp"
         android:layout_weight="0"
         android:ems="10"
-        android:hint="Youtube Video URL"
+        android:hint="Enter Youtube Video URL"
         android:inputType="textPersonName"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
