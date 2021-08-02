@@ -24,9 +24,25 @@
     <string name="Rate_Us">  Rate Us on PlayStore  </string>
     <string name="about_us">  About Us  </string>
     <string name="logout">  Logout  </string>
+    <string name="exit">  EXIT  </string>
+    <string name="confirmation">  Do You Really Want To Log Out?  </string>
     <string name="notifi_toggle_button">Off</string>
     <string name="OFF">Off</string>
     <string name="ON">Off</string>
+
+    <string name="headline">Headline</string>
+    <string name="source">Source</string>
+    <string name="time">Time</string>
+    <string name="news_desc">News will appear here...</string>
+
+    <string name="caption">Caption</string>
+    <string name="company">Company Name</string>
+    <string name="details">Coupon Details will Come Here</string>
+    <string name="claim">Claim Coupon</string>
+
+    <string name="forgot_password1">FORGOT PASSWORD</string>
+    <string name="confirm">confirm</string>
+    <string name="addfeed">Add News Feed</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -43,4 +59,6 @@
     <string name="team_mem_7">Anushya</string>
     <string name="team_mem_8">Yashvardhan</string>
     <string name="team_mem_9">Vamsi</string>
+
+
 </resources>

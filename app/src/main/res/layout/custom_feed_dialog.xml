@@ -16,7 +16,7 @@
         android:layout_weight="0"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Add New Feed"
+        android:text="@string/addfeed"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
