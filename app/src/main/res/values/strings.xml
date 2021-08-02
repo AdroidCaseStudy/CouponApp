@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CouponsApp</string>
+    <string name="app_name">CashCoup</string>
     <string name="sign_in">Sign In</string>
     <string name="email">Email ID</string>
     <string name="password">Password</string>
