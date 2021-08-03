@@ -16,11 +16,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
-
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_edit_profile.*
@@ -29,6 +25,8 @@ import java.io.IOException
 
 class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
 
+    val userRef : DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
+    val auth : FirebaseAuth = FirebaseAuth.getInstance()
 
     private var selectedImageFileUri: Uri? = null
     private var userProfileImageURL: String = ""
@@ -225,13 +223,16 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
     fun uploadImgaeToCloudStorage(activity: Activity, imageFileUri: Uri?){
         val fStorage = FirebaseStorage.getInstance()
             .reference.child(
-                FirebaseAuth.getInstance().currentUser?.email
-                        + "." + Constants.getFileExtension(activity,imageFileUri)
+                FirebaseAuth.getInstance().currentUser?.uid.toString() + ".jpg"
             )
 
         fStorage.putFile(imageFileUri!!).addOnSuccessListener { taskSnapshot ->
             Log.e("Firebase image URI",taskSnapshot.metadata!!.reference!!.downloadUrl.toString())
 
+            fStorage.downloadUrl.addOnSuccessListener {
+                val downloadUrl = it.toString()
+                userRef.child(auth.currentUser?.uid!!).child("profileImage").setValue(downloadUrl)
+            }
             taskSnapshot.metadata!!.reference!!.downloadUrl
                 .addOnSuccessListener { uri ->
                  val profile_image_ref =  applicationContext
@@ -240,9 +241,7 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
                  val editor = profile_image_ref.edit()
                  editor.putString("profile_image",uri.toString())
                  editor.apply()
-
-
-                            imageUploadSuccess(uri.toString())
+                    imageUploadSuccess(uri.toString())
                 }
         }
             .addOnFailureListener{exception ->
@@ -250,6 +249,8 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
                 Log.e(activity.javaClass.simpleName,
                     exception.message,exception)
             }
+
+
     }
 
 }

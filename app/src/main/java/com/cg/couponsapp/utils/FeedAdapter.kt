@@ -8,11 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import at.huber.youtubeExtractor.VideoMeta
 import at.huber.youtubeExtractor.YouTubeExtractor
 import at.huber.youtubeExtractor.YtFile
 import com.bumptech.glide.Glide
+import com.cg.couponsapp.Constants
 import com.cg.couponsapp.R
 import com.cg.couponsapp.model.Feed
 import com.google.android.exoplayer2.C
@@ -24,6 +27,11 @@ import com.google.android.exoplayer2.source.MergingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import java.lang.Exception
 
 
 class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
@@ -33,11 +41,16 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
     var videoPlayer: SimpleExoPlayer? = null
     lateinit var name : String
 
+    val storageRef : StorageReference = FirebaseStorage.getInstance().getReference()
+    val userRef : DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
+
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val descpT = view.findViewById<TextView>(R.id.feedDescTV)
         val nameT = view.findViewById<TextView>(R.id.feedUNameTV)
         val videoV = view.findViewById<PlayerView>(R.id.feedPlayerView)
         val imageV = view.findViewById<ImageView>(R.id.feedImageView)
+        val profileV = view.findViewById<ImageView>(R.id.feedProfileP)
+        val timeT = view.findViewById<TextView>(R.id.feedTimeTV)
     }
 
 
@@ -59,6 +72,19 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
 
         holder.nameT.text = feed.name
         holder.descpT.text = feed.description
+        holder.timeT.text = feed.date + " " + feed.time
+
+        userRef.child(feed.uid).addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.hasChild("profileImage")){
+                    val profileImg = snapshot.child("profileImage").value.toString()
+                    Glide.with(holder.itemView.context).load(profileImg).into(holder.profileV)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+
+        })
 
         //IMAGE
         if(feed.image) {
