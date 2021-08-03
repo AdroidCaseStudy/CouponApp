@@ -170,6 +170,7 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
             userHashMap[Constants.PHONE] = phone.toLong()
         }
         if(location.isNotEmpty()){
+            userHashMap[Constants.LOCATION] = location
             val locationPref = applicationContext.getSharedPreferences(Constants.LOCATION_PREF,0)
             val editor = locationPref.edit()
             editor.putString("Location",location)
