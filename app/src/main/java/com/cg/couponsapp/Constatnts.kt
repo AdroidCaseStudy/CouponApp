@@ -18,6 +18,7 @@ object Constants {
 
 
     const val PHONE:String = "phone"
+    const val LOCATION:String = "location"
 
     const val IMAGE:String = "image"
     const val LOCATION_PREF :String = "LOCATION_PREF"

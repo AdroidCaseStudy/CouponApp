@@ -15,10 +15,7 @@ import com.bumptech.glide.Glide
 import com.cg.couponsapp.utils.MakeProgressBar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 
 import kotlinx.android.synthetic.main.activity_settings_tab.*
 import kotlinx.android.synthetic.main.activity_settings_tab.view.*
@@ -29,6 +26,7 @@ class SettingsFragment : Fragment() {
 
     lateinit var fAuth : FirebaseAuth
     lateinit var pBar : ProgressBar
+    lateinit var usersRef : DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +35,7 @@ class SettingsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.activity_settings_tab, container, false)
 
+        usersRef = FirebaseDatabase.getInstance().reference.child("users")
         fAuth = FirebaseAuth.getInstance()
         pBar = MakeProgressBar(activity?.findViewById(android.R.id.content)!!).make()
         pBar.visibility = View.VISIBLE
@@ -146,13 +145,24 @@ class SettingsFragment : Fragment() {
 
 //        profile_user_email.setText(fAuth.currentUser?.email.toString())
 
-
         val profile_image_ref = activity?.getSharedPreferences(Constants.PROFILE_IMAGE_REF,0)
         val uri = profile_image_ref?.getString("profile_image","")
 
         Glide.with(this )
             .load(uri)
             .into(profile_user_image)
+
+        usersRef.child(user.uid).addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.hasChild("profileImage")){
+                    val profileImg = snapshot.child("profileImage").value.toString()
+                    Glide.with(this@SettingsFragment).load(profileImg).into(profile_user_image)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+
+        })
     }
 
     override fun onPause() {

@@ -22,6 +22,7 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.fragment_feed_list.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -146,8 +147,14 @@ class FeedFragment : Fragment() {
         }
     }
     private fun postFeed(isImage : Boolean,id:String){
+        var calendar = Calendar.getInstance()
+        val currentDate = SimpleDateFormat("dd-MM-yyyy")
+        val feedDate = currentDate.format(calendar.time)
+        val currentTime = SimpleDateFormat("HH:mm")
+        val feedTime = currentTime.format(calendar.time)
+
         fDatabase.reference.child("feeds").child(UUID.randomUUID().toString()).setValue(Feed(name,
-        id,isImage,dialogView.findViewById<EditText>(R.id.post_desc)?.text.toString()
+        id,isImage,dialogView.findViewById<EditText>(R.id.post_desc)?.text.toString(),fAuth.currentUser?.uid!!,feedDate,feedTime
             ))
         materialDialog.dismiss()
         rView.adapter?.notifyDataSetChanged()
