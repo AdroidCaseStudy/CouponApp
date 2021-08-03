@@ -1,13 +1,10 @@
 package com.cg.couponsapp.utils
 
+import android.content.Context
 import android.net.Uri
-import android.util.Log
-import android.util.SparseArray
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.util.*
+import android.view.*
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import at.huber.youtubeExtractor.VideoMeta
 import at.huber.youtubeExtractor.YouTubeExtractor
@@ -15,22 +12,20 @@ import at.huber.youtubeExtractor.YtFile
 import com.bumptech.glide.Glide
 import com.cg.couponsapp.R
 import com.cg.couponsapp.model.Feed
-import com.google.android.exoplayer2.C
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.audio.AudioAttributes
-import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.MergingMediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.source.*
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
-    lateinit var videoUrl:String
+    var videoUrl:String? = null
     lateinit var audioAttributes: AudioAttributes
     var videoPlayer: SimpleExoPlayer? = null
+    var hiddenVideoPlayer: SimpleExoPlayer? = null
     lateinit var name : String
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -69,6 +64,23 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
             } else {
                 Glide.with(holder.itemView.context).load(Uri.parse(imageUrl))
                     .placeholder(R.drawable.waiting).into(holder.imageV)
+                holder.imageV.setOnClickListener {
+                    val dialog = MaterialAlertDialogBuilder(it.context)
+                    val layoutInflater = LayoutInflater.from(it.context)
+                    val customView = layoutInflater.inflate(R.layout.custom_feed_fullscreen_dialog,null,false)
+                    val imageView = customView.findViewById<ImageView>(R.id.fullscreen_imageView)
+                    val videoView = customView.findViewById<PlayerView>(R.id.fullscreen_videoView)
+                    videoView.visibility = View.INVISIBLE
+                    imageView.visibility = View.VISIBLE
+                    dialog.setView(customView)
+                    val materialDialog = dialog.create()
+                    Glide.with(customView.context).load(Uri.parse(imageUrl))
+                        .placeholder(R.drawable.waiting).into(imageView)
+                    imageView.minimumHeight = 0
+                    imageView.minimumWidth = 0
+                    materialDialog.show()
+
+                }
             }
         }
 
@@ -80,15 +92,40 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
             videoPlayer = SimpleExoPlayer.Builder(holder.itemView.context).build()
             holder.videoV?.player = videoPlayer
             Log.d("FeedList","$videoUrl")
-            playYoutubeVideo(videoUrl,holder,videoPlayer!!)
-            //initializePlayer(holder)
+            playYoutubeVideo(videoUrl!!,holder.itemView.context,videoPlayer!!)
+
+            holder.videoV.setOnClickListener {
+                holder.videoV.player?.pause()
+                val dialog = MaterialAlertDialogBuilder(it.context)
+                val layoutInflater = LayoutInflater.from(it.context)
+                val customView = layoutInflater.inflate(R.layout.custom_feed_fullscreen_dialog,null,false)
+                val imageView = customView.findViewById<ImageView>(R.id.fullscreen_imageView)
+                val videoView = customView.findViewById<PlayerView>(R.id.fullscreen_videoView)
+                imageView.visibility = View.INVISIBLE
+                videoView.visibility = View.VISIBLE
+                dialog.setView(customView)
+                val materialDialog = dialog.create()
+                hiddenVideoPlayer = SimpleExoPlayer.Builder(customView.context).build()
+                videoView.player = hiddenVideoPlayer
+                videoUrl = "${feed.url}"
+                playYoutubeVideo(videoUrl!!,customView.context,hiddenVideoPlayer!!)
+
+                materialDialog.setOnDismissListener {
+                    hiddenVideoPlayer!!.stop()
+                }
+                materialDialog.setOnCancelListener {
+                    hiddenVideoPlayer!!.stop()
+                }
+                materialDialog.show()
+            }
+
         }
 
 
     }
 
-    private fun playYoutubeVideo(videoUrl: String, holder: ViewHolder, videoPlayer: SimpleExoPlayer) {
-        class YouTubeExtractor1 : YouTubeExtractor(holder.itemView.context) {
+    private fun playYoutubeVideo(videoUrl: String, context: Context, videoPlayer: SimpleExoPlayer) {
+        class YouTubeExtractor1 : YouTubeExtractor(context) {
             override fun onExtractionComplete(
                 ytFiles: SparseArray<YtFile>?,
                 videoMeta: VideoMeta?
@@ -122,8 +159,9 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
     override fun onViewDetachedFromWindow(holder: ViewHolder) {
         super.onViewDetachedFromWindow(holder)
         if(!holder.videoV.isFocused){
-            Log.d("Firstfunc","Here2")
+            Log.d("Firstfunc","Here2 \n $videoUrl")
             holder.videoV.player?.pause()
+            hiddenVideoPlayer?.pause()
         }
     }
 
@@ -132,10 +170,12 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
         if(!recyclerView.isFocused){
             if(videoPlayer!=null)
             {
-                Log.d("Firstfunc","Here")
+//                Log.d("Firstfunc","Here")
                 videoPlayer?.stop()
+                hiddenVideoPlayer?.pause()
             }
         }
     }
+
 
 }

@@ -14,7 +14,8 @@
         android:roundIcon="@drawable/logo_without_text"
         android:supportsRtl="true"
         android:theme="@style/Theme.CouponsApp"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        >
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity
@@ -30,7 +31,9 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SignInActivity" />
-        <activity android:name=".NavigationActivity" />
+        <activity android:name=".NavigationActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+        </activity>
     </application>
 
 </manifest>

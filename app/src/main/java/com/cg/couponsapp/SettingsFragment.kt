@@ -155,4 +155,9 @@ class SettingsFragment : Fragment() {
             .into(profile_user_image)
     }
 
+    override fun onPause() {
+        super.onPause()
+        pBar.visibility = View.GONE
+    }
+
 }

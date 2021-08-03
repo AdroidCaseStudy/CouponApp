@@ -208,6 +208,7 @@ class FeedFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         rView.adapter = null
+        pBar.visibility = View.GONE
     }
 
     override fun onDetach() {

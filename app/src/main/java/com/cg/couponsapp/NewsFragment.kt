@@ -92,4 +92,5 @@ class NewsFragment: Fragment(), AdapterView.OnItemSelectedListener {
     override fun onNothingSelected(parent: AdapterView<*>?) {
         TODO("Not yet implemented")
     }
+
 }
