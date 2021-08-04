@@ -105,8 +105,18 @@ class FeedFragment : Fragment() {
         }
         postButton.setOnClickListener {
             if(radioId==-1) Toast.makeText(customView.context,"Please select either an Image or a Video",Toast.LENGTH_LONG).show()
-            else if(radioId == R.id.post_radio_image) uploadImage()
-            else    uploadvideo()
+            else if(radioId == R.id.post_radio_image) {
+                uploadImage()
+                postButton.isEnabled = false
+                postButton.isFocusable = false
+                postButton.isClickable = false
+            }
+            else {
+                uploadvideo()
+                postButton.isEnabled = false
+                postButton.isFocusable = false
+                postButton.isClickable = false
+            }
         }
         materialDialog.show()
 
