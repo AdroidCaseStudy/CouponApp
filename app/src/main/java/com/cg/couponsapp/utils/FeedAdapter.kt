@@ -81,6 +81,7 @@ class FeedAdapter(val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.Vi
                 if(snapshot.hasChild("profileImage")){
                     val profileImg = snapshot.child("profileImage").value.toString()
                     Glide.with(holder.itemView.context).load(profileImg).into(holder.profileV)
+                    userRef.removeEventListener(this)
                 }
             }
 
