@@ -34,6 +34,8 @@ class NavigationActivity : AppCompatActivity(){
         navController = findNavController(R.id.bottom_nav_fragment)
         mauth = FirebaseAuth.getInstance()
 
+        //this is a test comment
+
         setupActionBarWithNavController(navController)
         setupSmoothBottomMenu()
 
