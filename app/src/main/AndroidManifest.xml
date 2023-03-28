@@ -15,8 +15,8 @@
         android:theme="@style/Theme.CouponsApp"
         android:usesCleartextTraffic="true"
         >
-        <activity android:name=".AboutUsActivity" />
-        <activity android:name=".EditProfileActivity" />
+        <activity android:name=".AboutUsActivity" android:exported="false"/>
+        <activity android:name=".EditProfileActivity" android:exported="false"/>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
@@ -26,11 +26,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChangePasswordActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".SignInActivity" />
+        <activity android:name=".ChangePasswordActivity" android:exported="false"/>
+        <activity android:name=".MainActivity" android:exported="false"/>
+        <activity android:name=".SignUpActivity" android:exported="false"/>
+        <activity android:name=".SignInActivity" android:exported="false"/>
         <activity android:name=".NavigationActivity"
+            android:exported="false"
             android:configChanges="orientation|keyboardHidden|screenSize">
         </activity>
     </application>
