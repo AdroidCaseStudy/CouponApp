@@ -15,7 +15,7 @@
         android:theme="@style/Theme.CouponsApp"
         android:usesCleartextTraffic="true"
         >
-        <activity android:name=".AboutUsActivity" android:exported="false"/>
+        <activity android:name=".AboutUsActivity" android:exported="false" />
         <activity android:name=".EditProfileActivity" android:exported="false"/>
         <activity
             android:name=".SplashActivity"
